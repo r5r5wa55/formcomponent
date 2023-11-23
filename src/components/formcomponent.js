@@ -12,10 +12,13 @@ export default function FormComponent(){
 
     const [errusername,setErrUserNmae]= useState("");
     const [erremail,setErrEmail]= useState("");
+    const [errpassword,setErrpassword]= useState("");
+    const [errrepassword,setErrRepassword]= useState("");
 
     const [colorname,setColorName]= useState("");
     const [coloremail,setColorEmail]= useState("");
-
+    const [colorpassword,setColorPassword]= useState("");
+    const [colorrepassword,setColorRePassword]= useState("");
     function checkError(e){
         e.preventDefault()
         if(username.length < 8){
@@ -33,6 +36,27 @@ export default function FormComponent(){
             setErrEmail("รูปแบบไม่ถูกต้อง")
             setColorEmail("red")
         }
+        if(password.length < 8){
+            setErrpassword("ป้อนชื่อผู้ใช้จำนวนมากกว่า 8 ตัวอักษร")
+            setColorPassword("red")
+
+        }else{
+            setErrpassword("")
+            setColorPassword("green")
+ 
+        }
+        if(password !=="" && repassword === password){
+            setErrRepassword("")
+            setColorRePassword("green")
+ 
+
+        }else{
+            setErrRepassword("รหัสไม่ถูกต้อง")
+            setColorRePassword("red")
+ 
+        }
+  
+
 
     }
 
@@ -56,17 +80,17 @@ export default function FormComponent(){
                 </div>
                 <div className="form-control">
                     <label>รหัสผ่าน</label>
-                    <input type="password" value={password} onChange={(e)=>{
+                    <input type="password" value={password} style={{borderColor:colorpassword}} onChange={(e)=>{
                         setPassword(e.target.value)
                     }}></input>
-                    <small>error massage</small>
+                    <small>{errpassword}</small>
                 </div>
                 <div className="form-control">
                     <label>ยืนยันรหัสผ่าน</label>
-                    <input type="password" value={repassword} onChange={(e)=>{
+                    <input type="password" value={repassword} style={{borderColor:colorrepassword}} onChange={(e)=>{
                         setRepassword(e.target.value)
                     }}></input>
-                    <small>error massage</small>
+                    <small>{errrepassword}</small>
                 </div>
                 <button type="submit">ยืนยัน</button>
             </form>
